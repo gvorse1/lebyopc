@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LebyoPC Components Database</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#ffffff;
+    color:#000000;
+    font-family:Consolas, Monaco, monospace;
+    padding:20px;
+}
+
+header{
+    margin-bottom:20px;
+}
+
+h1{
+    font-size:24px;
+    margin-bottom:8px;
+}
+
+p{
+    color:#666;
+}
+
+pre{
+    white-space:pre-wrap;
+    word-break:break-word;
+    line-height:1.6;
+    font-size:14px;
+    border:1px solid #ddd;
+    padding:20px;
+    border-radius:8px;
+    background:#fafafa;
+}
+
+.loading{
+    color:#888;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>LebyoPC Components Database</h1>
+    <p>494 categorized products</p>
+</header>
+
+<pre id="content" class="loading">Loading lebyopc.txt...</pre>
+
+<script>
+fetch('lebyopc.txt')
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Could not load lebyopc.txt');
+    }
+    return response.text();
+})
+.then(text => {
+    const content = document.getElementById('content');
+    content.textContent = text;
+    content.classList.remove('loading');
+})
+.catch(error => {
+    document.getElementById('content').textContent =
+        'Error loading lebyopc.txt\n\n' + error.message;
+});
+</script>
+
+</body>
+</html>
